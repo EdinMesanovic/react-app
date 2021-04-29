@@ -36,12 +36,12 @@ const Course = ({ match, history }) => {
     if (id === "0") {
       insert("courses", course, (data) => {
         if (data) return history.push("/courses");
-        console.log("There was an error during saving data");
+        console.log("There was an error during saving data!");
       });
     } else {
       update("courses", id, course, (data) => {
         if (data) return history.push("/courses");
-        console.log("There was an error during saving data");
+        console.log("There was an error during saving data!");
       });
     }
   };
