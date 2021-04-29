@@ -33,16 +33,20 @@ const Course = ({ match, history }) => {
 
   const save = () => {
     course._id = undefined;
-    if (id === "0") {
-      insert("courses", course, (data) => {
-        if (data) return history.push("/courses");
-        console.log("There was an error during saving data!");
-      });
+    if (!course.name || !course.points) {
+      alert("Course name or points field is empty");
     } else {
-      update("courses", id, course, (data) => {
-        if (data) return history.push("/courses");
-        console.log("There was an error during saving data!");
-      });
+      if (id === "0") {
+        insert("courses", course, (data) => {
+          if (data) return history.push("/courses");
+          console.log("There was an error during saving data!");
+        });
+      } else {
+        update("courses", id, course, (data) => {
+          if (data) return history.push("/courses");
+          console.log("There was an error during saving data!");
+        });
+      }
     }
   };
 

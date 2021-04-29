@@ -33,16 +33,20 @@ const Student = ({ match, history }) => {
 
   function save() {
     student._id = undefined;
-    if (id === "0") {
-      insert("students", student, (data) => {
-        if (data) return history.push("/students");
-        console.log("There was an error during saving data");
-      });
+    if (!student.firstName || !student.lastName) {
+      alert("First name or last name field is empty");
     } else {
-      update("students", id, student, (data) => {
-        if (data) return history.push("/students");
-        console.log("There was an error during saving data");
-      });
+      if (id === "0") {
+        insert("students", student, (data) => {
+          if (data) return history.push("/students");
+          console.log("There was an error during saving data");
+        });
+      } else {
+        update("students", id, student, (data) => {
+          if (data) return history.push("/students");
+          console.log("There was an error during saving data");
+        });
+      }
     }
   }
 
@@ -64,9 +68,9 @@ const Student = ({ match, history }) => {
             value={student.firstName}
             onChange={changeHolder}
             required
-          ></input>
+          />
         </div>
-        <div style={{ margin: "12px" }}>
+        <div style={{ margin: "12px" }} required>
           <label htmlFor='name'>Last name: </label>
           <input
             type='text'
@@ -74,7 +78,7 @@ const Student = ({ match, history }) => {
             value={student.lastName}
             onChange={changeHolder}
             required
-          ></input>
+          />
         </div>
         <div style={{ margin: "12px" }}>
           <label htmlFor='name'>Year of Birth: </label>
@@ -83,7 +87,7 @@ const Student = ({ match, history }) => {
             name='yearOfBirth'
             value={student.yearOfBirth}
             onChange={changeHolder}
-          ></input>
+          />
         </div>
         <div style={{ margin: "12px" }}>
           <label htmlFor='name'>Address: </label>
@@ -92,7 +96,7 @@ const Student = ({ match, history }) => {
             name='address'
             value={student.address}
             onChange={changeHolder}
-          ></input>
+          />
         </div>
         <hr />
         {id !== "0" && (
