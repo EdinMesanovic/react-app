@@ -20,7 +20,7 @@ const Courses = () => {
             <th>Course name</th>
             <th>Pointes</th>
             <td>
-              <Link to='/courses/add'>Add new</Link>
+              <Link to='/courses/0'>Add new</Link>
             </td>
           </tr>
         </thead>

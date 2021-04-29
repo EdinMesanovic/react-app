@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { update, read, insert } from "../services/apiService";
+import { update, read, insert, remove } from "../services/apiService";
 
 const Course = ({ match, history }) => {
   const [id] = useState(match.params.id);
@@ -46,6 +46,12 @@ const Course = ({ match, history }) => {
     }
   };
 
+  const del = () => {
+    remove("courses", id, (data) => {
+      history.push("/courses");
+    });
+  };
+
   return (
     <div className='container'>
       <h2>Course</h2>
@@ -69,9 +75,13 @@ const Course = ({ match, history }) => {
           />
         </div>
         <hr />
-        <div className='leftBtn'>
-          <button type='button'>DELETE</button>
-        </div>
+        {id !== "0" && (
+          <div className='leftBtn'>
+            <button type='button' onClick={del}>
+              DELETE
+            </button>
+          </div>
+        )}
         <div className='rightBtn'>
           <button type='button' onClick={back}>
             BACK
